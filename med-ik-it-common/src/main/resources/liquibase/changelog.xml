@@ -1,0 +1,96 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet id="createTablesUser" author="ArManukyan">
+        <createTable tableName="users">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="surname" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="regis_date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="birth_date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="pic_name" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="user_type" type="enum('ADMIN','PATIENT','DOCTOR')">
+                <constraints nullable="true"/>
+            </column>
+            <column name="enabled" type="tinyint(1)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="token" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="createTablePatient" author="ArManukyan">
+        <createTable tableName="patient">
+            <column name="id" type="int">
+                <constraints primaryKey="true" nullable="false"
+                             foreignKeyName="fk_patient_users" references="users(id)" deleteCascade="true"/>
+            </column>
+            <column name="region" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="address" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="nation" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="createTableDepartment" author="ArManukyan">
+        <createTable tableName="department">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="createTableDoctor" author="ArManukyan">
+        <createTable tableName="doctor">
+            <column name="id" type="int">
+                <constraints primaryKey="true" nullable="false"
+                             foreignKeyName="fk_doctor_users" references="users(id)"/>
+            </column>
+            <column name="speciality" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="phone_number" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="department_id" type="int">
+                <constraints nullable="false"
+                             foreignKeyName="fk_doctor_department" references="department(id)"/>
+            </column>
+            <column name="zoom_id" type="int">
+                <constraints nullable="true"/>
+            </column>
+            <column name="zoom_password" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
