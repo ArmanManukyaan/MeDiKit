@@ -28,6 +28,7 @@ public class SpringSecurityConfig {
                 .requestMatchers("/js/**").permitAll()
                 .requestMatchers("/fonts/**").permitAll()
                 .requestMatchers("/patients/**").permitAll()
+                .requestMatchers("/users/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
