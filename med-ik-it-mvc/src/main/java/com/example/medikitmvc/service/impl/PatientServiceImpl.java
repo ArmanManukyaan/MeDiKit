@@ -80,11 +80,5 @@ public class PatientServiceImpl implements PatientService {
                 patientRepository.save(patientFromDbData);
             }
         }
-
-
-
-
-
-
     }
 }

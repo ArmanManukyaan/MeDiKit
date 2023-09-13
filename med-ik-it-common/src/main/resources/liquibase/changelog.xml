@@ -30,8 +30,8 @@
             <column name="user_type" type="enum('ADMIN','PATIENT','DOCTOR')">
                 <constraints nullable="true"/>
             </column>
-            <column name="enabled" type="tinyint(1)">
-                <constraints nullable="true"/>
+            <column name="enabled" type="tinyint(1)" defaultValueBoolean="false">
+                <constraints nullable="false"/>
             </column>
             <column name="token" type="varchar(255)">
                 <constraints nullable="true"/>
